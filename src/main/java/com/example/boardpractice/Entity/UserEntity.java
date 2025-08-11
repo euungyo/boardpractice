@@ -1,25 +1,32 @@
 package com.example.boardpractice.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.*;
-import java.time.LocalDate;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Table(name="user_table")
+
 public class UserEntity {
+
     @Id
     @GeneratedValue
-    private Long id;
+    private Long userId;
 
+    @Column
     private String nickname;
+    @Column
+    private String password;
+    @Column
     private String name;
-    private int age;
-    private LocalDate createdAt;
+    @Column
+    private String age;
+
+    private String role;
 }
