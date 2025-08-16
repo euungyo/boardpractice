@@ -44,8 +44,11 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/login", "/", "/join").permitAll()
-                        .anyRequest().authenticated());
+                .requestMatchers("/login", "/", "/join", "/signup").permitAll() //html해보면서singup추가함.
+                        .requestMatchers("/admin/**").hasRole("ADMIN") //관리자만
+                        .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")//user와 관리자
+                .anyRequest().authenticated());
+
 
         http
                 .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class);

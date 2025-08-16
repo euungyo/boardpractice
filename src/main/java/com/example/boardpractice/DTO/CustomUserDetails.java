@@ -29,7 +29,7 @@ public class CustomUserDetails implements UserDetails {
             @Override
             public String getAuthority() {
 
-                return userEntity.getRole();
+                return userEntity.getRole(); //role필드 그대로 반환
             }
         });
 

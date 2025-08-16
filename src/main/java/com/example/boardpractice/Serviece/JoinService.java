@@ -31,7 +31,7 @@ public class JoinService {
                 .name(username)
                 .password(bCryptPasswordEncoder.encode(password))
                 .age(age)
-                .role("ROLE_ADMIN")
+                .role("ROLE_USER")
                 .build();
 
         userRepository.save(data);

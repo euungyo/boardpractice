@@ -22,7 +22,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     private final JWTUtil jwtUtil;
     @Override
     public String obtainUsername(HttpServletRequest request) {
-        return request.getParameter("nickname");
+        return request.getParameter("nickname"); //spring security기본은 username파라미터... 우리는 nickname을 사용하니까 직접 override
     }
 
     @Override
@@ -33,7 +33,11 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(nickname, password, null);
 
-        return authenticationManager.authenticate(authToken);
+        return authenticationManager.authenticate(authToken); //authenticationManager에게 토큰 인증 요청 -> UserDetailsService.loadUserByUsername()호출
+        //31줄~36줄 : 유저가 입력한 nickanme+password-> 토큰 만들기
+        //AuthenticationManager한테 넘겨서 인증 시도
+        //이때 내부적으로 CustomUserDetailsService.loadUserByUsername()이 호출
+        //-> DB에서 nickname찾아옴
     }
 
     @Override
