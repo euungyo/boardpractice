@@ -44,7 +44,7 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests((auth) -> auth
-                .requestMatchers("/login", "/", "/join", "/signup").permitAll() //html해보면서singup추가함.
+                .requestMatchers("/login", "/", "/join", "/signup", "/board/**").permitAll() //html해보면서singup추가함.
                         .requestMatchers("/admin/**").hasRole("ADMIN") //관리자만
                         .requestMatchers("/user/**").hasAnyRole("USER", "ADMIN")//user와 관리자
                 .anyRequest().authenticated());
