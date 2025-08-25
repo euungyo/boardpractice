@@ -48,6 +48,17 @@ public class BoardService {
             return null;
         }
     }
+
+    public BoardDTO update(BoardDTO boardDTO) {
+        BoardEntity boardEntity = BoardEntity.toupdateEntity(boardDTO);
+        boardRepository.save(boardEntity);
+        return findById(boardEntity.getId());
+    }
+
+    public void delete(Long id){
+        boardRepository.deleteById(id); //extends하면 사용할 수 있는 쿼리문들!
+    }
+
 }
 
 
