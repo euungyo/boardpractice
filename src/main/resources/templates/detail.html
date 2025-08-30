@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>글 상세</title>
+</head>
+<body>
+<h2>글 상세보기</h2>
+
+<p><b>ID:</b> <span th:text="${boardDTO.id}"></span></p>
+<p><b>제목:</b> <span th:text="${boardDTO.boardTitle}"></span></p>
+<p><b>작성자:</b> <span th:text="${boardDTO.boardWriter}"></span></p>
+<p><b>작성시간:</b> <span th:text="${#temporals.format(boardDTO.boardCreatedTime, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+<p><b>조회수:</b> <span th:text="${boardDTO.boardHits}"></span></p>
+<p><b>내용:</b></p>
+<p th:text="${boardDTO.boardContents}"></p>
+
+<a href="/board/">목록으로</a>
+</body>
+</html>
