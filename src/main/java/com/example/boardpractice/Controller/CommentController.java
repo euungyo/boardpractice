@@ -1,15 +1,19 @@
 package com.example.boardpractice.Controller;
 
 
+import com.example.boardpractice.DTO.BoardDTO;
 import com.example.boardpractice.DTO.CommentDTO;
 import com.example.boardpractice.Serviece.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.stream.events.Comment;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -37,5 +41,22 @@ public class CommentController {
     public ResponseEntity<List<CommentDTO>> findAll(@PathVariable Long boardId) {
         List<CommentDTO> commentDTOList = commentService.findAll(boardId);
         return ResponseEntity.ok(commentDTOList);
+    }
+
+
+    @PutMapping("/update/{id}")
+    public CommentDTO update(@PathVariable Long id, @RequestBody CommentDTO commentDTO) {
+        commentDTO.setId(id);
+        return commentService.update(commentDTO);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public Map<String, Object> delete(@PathVariable Long id) {
+        commentService.delete(id);
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", "success");
+        response.put("deletedId", id);
+        return response; // JSON 응답
     }
 }

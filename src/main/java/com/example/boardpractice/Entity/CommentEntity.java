@@ -1,5 +1,6 @@
 package com.example.boardpractice.Entity;
 
+import com.example.boardpractice.DTO.BoardDTO;
 import com.example.boardpractice.DTO.CommentDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -26,6 +27,16 @@ public class CommentEntity extends BaseEntity {
 
     public static CommentEntity toSaveEntity(CommentDTO commentDTO,BoardEntity boardEntity) {
         CommentEntity commentEntity = new CommentEntity();
+        commentEntity.setCommentWriter(commentDTO.getCommentWriter());
+        commentEntity.setCommentContents(commentDTO.getCommentContents());
+        commentEntity.setBoardEntity(boardEntity);
+        return commentEntity;
+    }
+
+
+    public static CommentEntity toUpdateEntity(CommentDTO commentDTO, BoardEntity boardEntity) {
+        CommentEntity commentEntity = new CommentEntity();
+        commentEntity.setId(commentDTO.getId());
         commentEntity.setCommentWriter(commentDTO.getCommentWriter());
         commentEntity.setCommentContents(commentDTO.getCommentContents());
         commentEntity.setBoardEntity(boardEntity);
